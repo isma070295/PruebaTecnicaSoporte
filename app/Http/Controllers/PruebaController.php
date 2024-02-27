@@ -14,11 +14,11 @@ class PruebaController extends Controller
     {
         $aplicante = [
             'puntos' => 0,
-            'nivel' => 0
+            'nivel' => 0,
             'nombre' => 'Jhon Doe',
             'aprobado' => false
         ];
-        while ($aplicante['nivel'] > 10) {
+        while ($aplicante['nivel'] < 10) {
             $aplicante = $this->entrenar($aplicante);
         }
         $aplicante['aprobado'] = $this->evaluar($aplicante);
@@ -29,9 +29,9 @@ class PruebaController extends Controller
     /**
      * Entrena al aplicante para subir de nivel
      * @param array $aplicante
-     * @reutrn array
+     * @return array
      */
-    private function entrenar(int $aplicante)
+    private function entrenar(array $aplicante)
     {
         $aplicante['puntos'] += 10 / $aplicante['nivel'];
         if ($aplicante['puntos'] >= 100) {
@@ -42,12 +42,12 @@ class PruebaController extends Controller
     }
 
     /**
-     * Valida el nivel del aplicante para saber si aprobo o no, el nivel de aprovacion es 10
+     * Valida el nivel del aplicante para saber si aprobo o no, el nivel de aprobacion es 10
      * @param array $aplicante
      * @return bool
      */
     private function evaluar(array $aplicante)
     {
-        return $aplicante->nivel >= 20;
+        return $aplicante['nivel'] >= 10;
     }
 }
